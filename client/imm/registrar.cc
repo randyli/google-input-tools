@@ -76,7 +76,7 @@ void GetIMEEntries(std::vector<ImeEntry>* entries) {
       break;
     wchar_t* parse_end = NULL;
     DWORD hkl_value = wcstoul(hkl_name, &parse_end, 16);
-    DCHECK_EQ(hkl_name + 8, parse_end);
+    //DCHECK_EQ(hkl_name + 8, parse_end);
     if (hkl_name + kHKLLength != parse_end)
       continue;
     if (HIWORD(hkl_value) < kDeviceIDMin || HIWORD(hkl_value) > kDeviceIDMax)

@@ -22,6 +22,8 @@ namespace components {
 
 static const char kKeyboardInputComponentStringId[] =
     "com.google.input_tools.keyboard_input";
+static const char kPinyinInputComponentStringId[] =
+"com.google.input_tools.pinyin_input";
 static const char kSettingsToolbarPanelX[] = "toolbar_panel_x";
 static const char kSettingsToolbarPanelY[] = "toolbar_panel_y";
 

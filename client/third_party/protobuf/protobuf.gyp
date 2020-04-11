@@ -1,4 +1,5 @@
 {
+'includes' :['../../build/common.gypi'],
   'conditions': [
     ['OS=="mac"', {
       'targets': [

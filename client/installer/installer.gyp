@@ -1,4 +1,5 @@
 {
+'includes' :['../build/common.gypi'],
   'targets': [
     {
       'target_name': 'win32_register',

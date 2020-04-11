@@ -187,6 +187,12 @@ bool HubImpl::Dispatch(Connector* connector, proto::Message* message) {
     }
     return DeregisterComponents(connector, mptr.release());
   }
+#if !defined(NDEBUG)
+  if (type == MSG_SET_COMPOSITION) {
+
+	  DLOG(WARNING) << "Processing message: MSG_SET_CMOPOSITION\n";
+  }
+#endif
 
   Component* source = GetComponent(source_id);
   // The source component must belong to the connector.

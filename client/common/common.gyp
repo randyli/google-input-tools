@@ -1,4 +1,5 @@
 {
+	'includes' :['../build/common.gypi'],
   'variables': {
     'srcs': [
       'app_const.cc',

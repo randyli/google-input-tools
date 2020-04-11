@@ -1,6 +1,6 @@
 {
   'variables': {
-    'library%': 'static_library',
+    'library': 'static_library',
     'PROTOBUF' : '<!(echo %PROTOBUF%)/src',
     'GTEST' : '<!(echo %GTEST%)',
     'ZLIB' : '<!(echo %ZLIB%)',
@@ -118,6 +118,7 @@
           '__windows__',
           'NO_SHLWAPI_ISOS',
           '_USING_V110_SDK71_',
+		  '_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS',
         ],
         'include_dirs': [
           '<(DEPTH)/base/posix/',
@@ -147,7 +148,7 @@
             'DefaultCharIsUnsigned': 'true',       # /J
             'SuppressStartupBanner': 'true',       # /nologo
             'WarningLevel': '3',                   # /W3
-            'WarnAsError': 'true',                 # /WX
+            'WarnAsError': 'false',                 # /WX
             'UsePrecompiledHeader': '1',           # /Yc
             'UseFullPaths': 'true',                # /FC
             'PrecompiledHeaderThrough': 'precompile.h',

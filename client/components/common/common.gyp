@@ -1,4 +1,5 @@
 {
+'includes' :['../../build/common.gypi'],
   'variables': {
     'srcs': [
       'file_utils_win.cc',

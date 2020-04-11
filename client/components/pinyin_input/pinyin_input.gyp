@@ -2,14 +2,14 @@
   'includes' :['../../build/common.gypi'],
   'targets': [
     {
-      'target_name': 'keyboard_input',
+      'target_name': 'pinyin_input',
       'type': '<(library)',
       'include_dirs': [
         '<(SHARED_INTERMEDIATE_DIR)/protoc_out',
       ],
       'sources': [
-        'keyboard_input_component.cc',
-		'keyboard_input_component.h',
+        'pinyin_input_component.cc',
+		'pinyin_input_component.h',
       ],
       'dependencies': [
         '<(DEPTH)/base/base.gyp:base',

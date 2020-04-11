@@ -1,4 +1,5 @@
 {
+'includes' :['../../build/common.gypi'],
   'targets': [
     {
       'target_name': 'ipc_console',
@@ -11,6 +12,7 @@
 		'<(DEPTH)/common/common.gyp:common',
         '<(DEPTH)/components/common/common.gyp:component_common',
 		'<(DEPTH)/components/keyboard_input/keyboard_input.gyp:keyboard_input',
+		'<(DEPTH)/components/pinyin_input/pinyin_input.gyp:pinyin_input',
 		'<(DEPTH)/components/plugin_wrapper/plugin_wrapper.gyp:plugin_component_stub',
 		'<(DEPTH)/components/plugin_manager/plugin_manager.gyp:plugin_manager',
         '<(DEPTH)/components/settings_store/settings_store.gyp:settings_store',

@@ -33,6 +33,7 @@
 #include "components/plugin_manager/plugin_manager_component.h"
 #include "components/settings_store/settings_store_win.h"
 #include "components/keyboard_input/keyboard_input_component.h"
+#include "components/pinyin_input/pinyin_input_component.h"
 #include "components/ui/skin_ui_component.h"
 #include "ipc/direct_message_channel.h"
 #include "ipc/hub_host.h"
@@ -198,7 +199,10 @@ int WINAPI _tWinMain(HINSTANCE hInstance,
   ime_goopy::components::KeyboardInputComponent* keyboard_input_component =
       new ime_goopy::components::KeyboardInputComponent();
   ime_host->AddComponent(keyboard_input_component);
-
+  // Adds Pinyin Input component.
+  ime_goopy::components::PinyinInputComponent* pinyin_input_component =
+	  new ime_goopy::components::PinyinInputComponent();
+  ime_host->AddComponent(pinyin_input_component);
   // Connects ime_host to hub.
   scoped_ptr<DirectMessageChannel> ime_hub_channel(
       new DirectMessageChannel(hub.get()));

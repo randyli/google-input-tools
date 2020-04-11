@@ -1,4 +1,5 @@
 {
+'includes' :['../../build/common.gypi'],
   'target_defaults': {
     'defines': [
       'GGL_FOR_GOOPY',

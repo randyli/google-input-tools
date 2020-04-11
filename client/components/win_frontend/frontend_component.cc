@@ -918,11 +918,11 @@ void FrontendComponent::OnMsgInputMethodActivated(
   DVLOG(3) << __SHORT_FUNCTION__;
 
   scoped_ptr<ipc::proto::Message> mptr(message);
-  DCHECK_EQ(mptr->payload().component_info_size(), 1);
+  //
 
   if (mptr->payload().component_info_size() != 1 || mptr->icid() != icid_)
     return;
-
+  DCHECK_EQ(mptr->payload().component_info_size(), 1);
   const ipc::proto::ComponentInfo& component_info =
       mptr->payload().component_info(0);
   if (component_info.string_id() != current_input_method_.string_id()) {

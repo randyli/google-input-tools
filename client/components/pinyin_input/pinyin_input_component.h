@@ -17,8 +17,8 @@
 // This file defines an ime component class which just returns what the user
 // inputs from the keyboard.
 
-#ifndef GOOPY_COMPONENTS_KEYBOARD_INPUT_KEYBOARD_INPUT_COMPONENT_H_
-#define GOOPY_COMPONENTS_KEYBOARD_INPUT_KEYBOARD_INPUT_COMPONENT_H_
+#ifndef GOOPY_COMPONENTS_PINYIN_INPUT_KEYBOARD_INPUT_COMPONENT_H_
+#define GOOPY_COMPONENTS_PINYIN_INPUT_KEYBOARD_INPUT_COMPONENT_H_
 
 #include "base/basictypes.h"
 #include "base/compiler_specific.h"
@@ -34,10 +34,10 @@ class Message;
 namespace ime_goopy {
 namespace components {
 
-class KeyboardInputComponent : public ipc::ComponentBase {
+class PinyinInputComponent : public ipc::ComponentBase {
  public:
-  KeyboardInputComponent();
-  virtual ~KeyboardInputComponent();
+  PinyinInputComponent();
+  virtual ~PinyinInputComponent();
 
   // Overridden interface ipc::Component.
   virtual void GetInfo(ipc::proto::ComponentInfo* info) OVERRIDE;
@@ -46,9 +46,13 @@ class KeyboardInputComponent : public ipc::ComponentBase {
  private:
   // Handles input context related messages.
   void OnMsgAttachToInputContext(ipc::proto::Message* message);
+  void OnMsgShouldProcessKey(ipc::proto::Message* message);
   void OnMsgProcessKey(ipc::proto::Message* message);
-  
-  DISALLOW_COPY_AND_ASSIGN(KeyboardInputComponent);
+  void OnMsgQueryCandidateList(ipc::proto::Message* message);
+  void OnMsgQueryComposition(ipc::proto::Message* message);
+  std::string _composition;
+
+  DISALLOW_COPY_AND_ASSIGN(PinyinInputComponent);
 };
 
 }  // namespace components

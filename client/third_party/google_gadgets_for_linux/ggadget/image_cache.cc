@@ -160,7 +160,7 @@ class ImageCache::Impl : public WatchCallbackInterface {
 #ifdef DEBUG_IMAGE_CACHE
     DLOG("Delete ImageCache: %p", this);
     DLOG("Image statistics(new/shared): "
-         "local: %d/%d, global: %d/%d, remained: %"PRIuS
+         "local: %d/%d, global: %d/%d, remained: %"
          " trashed/untrashed: %d/%d",
          num_new_local_images_, num_shared_local_images_,
          num_new_global_images_, num_shared_global_images_,
@@ -327,7 +327,7 @@ class ImageCache::Impl : public WatchCallbackInterface {
 
   void PurgeTrashCan() {
 #ifdef DEBUG_IMAGE_CACHE
-    DLOG("Purge trashed images: %"PRIuS,
+    DLOG("Purge trashed images: %",
          trashed_images_.size() + trashed_mask_images_.size());
 #endif
     for (TrashImageMap::const_iterator it = trashed_images_.begin();
