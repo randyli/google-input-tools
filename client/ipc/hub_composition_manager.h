@@ -54,6 +54,8 @@ class HubCompositionManager : public Hub::Connector {
       CandidateListMap;
 
   // Message handlers.
+  bool OnMsgInputContextCreated(proto::Message* message);
+  bool OnMsgInputContextDeleted(proto::Message* message);
   bool OnMsgAttachToInputContext(Component* source, proto::Message* message);
   bool OnMsgDetachedFromInputContext(Component* source,
                                      proto::Message* message);

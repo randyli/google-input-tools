@@ -25,6 +25,8 @@ namespace {
 
 // Messages can be consumed by this built-in component.
 const uint32 kConsumeMessages[] = {
+  //ipc::MSG_INPUT_CONTEXT_CREATED,
+  //ipc::MSG_INPUT_CONTEXT_DELETED,
   ipc::MSG_ATTACH_TO_INPUT_CONTEXT,
   ipc::MSG_DETACHED_FROM_INPUT_CONTEXT,
 
@@ -85,6 +87,10 @@ bool HubCompositionManager::Send(proto::Message* message) {
   Component* source = hub_->GetComponent(mptr->source());
   DCHECK(source);
   switch (message->type()) {
+  case MSG_INPUT_CONTEXT_CREATED:
+	  return OnMsgInputContextCreated(mptr.release());
+  case MSG_INPUT_CONTEXT_DELETED:
+	  return OnMsgInputContextDeleted(mptr.release());
     case MSG_ATTACH_TO_INPUT_CONTEXT:
       return OnMsgAttachToInputContext(source, mptr.release());
     case MSG_DETACHED_FROM_INPUT_CONTEXT:
@@ -105,6 +111,27 @@ bool HubCompositionManager::Send(proto::Message* message) {
       DLOG(ERROR) << "Unexpected message:" << GetMessageName(mptr->type());
       return false;
   }
+}
+
+bool HubCompositionManager::OnMsgInputContextCreated(proto::Message* message) {
+	scoped_ptr<proto::Message> mptr(message);
+	DCHECK(message->has_payload() && message->payload().has_input_context_info());
+
+	const uint32 icid = message->payload().input_context_info().id();
+	InputContext* ic = hub_->GetInputContext(icid);
+	DCHECK(ic);
+	hub_->AttachToInputContext(self_, ic, InputContext::ACTIVE_STICKY, true);
+	return true;
+}
+
+bool HubCompositionManager::OnMsgInputContextDeleted(proto::Message* message) {
+	scoped_ptr<proto::Message> mptr(message);
+	DCHECK(message->has_payload() && message->payload().uint32_size());
+	uint32 icid = message->payload().uint32(0);
+	composition_map_.erase(icid);
+	candidate_list_map_.erase(icid);
+	//command_lists_.erase();
+	return true;
 }
 
 bool HubCompositionManager::OnMsgAttachToInputContext(

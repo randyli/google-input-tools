@@ -43,6 +43,7 @@ const uint32 kConsumeMessages[] = {
 };
 
 const uint32 kProduceMessages[] = {
+  ipc::MSG_REQUEST_CONSUMER,
   ipc::MSG_SET_COMPOSITION,
   ipc::MSG_INSERT_TEXT,
 };
@@ -128,8 +129,9 @@ void PinyinInputComponent::Handle(Message* message) {
 }
 
 void PinyinInputComponent::OnMsgAttachToInputContext(Message* message) {
-  scoped_ptr<Message> mptr(message);
-
+	
+	scoped_ptr<Message> mptr(message);
+	uint32 icid = mptr->icid();
   //DCHECK_EQ(mptr->reply_mode(), Message::NEED_REPLY);
   ReplyTrue(mptr.release());
   /*
@@ -139,6 +141,20 @@ void PinyinInputComponent::OnMsgAttachToInputContext(Message* message) {
 	  true));
   Message* query_msg  = NewMessage(ipc::MSG_QUERY_COMPONENT, message->icid(), true);
   */
+
+  if (icid != ipc::kInputContextNone) {
+	  message = NewMessage(ipc::MSG_REQUEST_CONSUMER, icid, false);
+
+	  // Although we only produce broadcast messages, we still need at least one
+	  // component to handle them to show the composition text and candidate list
+	  // to the user.
+	  for (size_t i = 0; i < arraysize(kProduceMessages); ++i)
+		  message->mutable_payload()->add_uint32(kProduceMessages[i]);
+	  uint32 serial;
+	  Send(message, &serial);
+	  
+  }
+
  }
 
 void PinyinInputComponent::OnMsgProcessKey(Message* message) {
